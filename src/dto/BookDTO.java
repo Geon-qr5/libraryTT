@@ -15,7 +15,10 @@ public class BookDTO {
     private String regdate;
     private String r_no;
 
-    public BookDTO() {
-
+    public BookDTO(String b_no, String title, String author, int price) {
+        this.b_no = b_no;
+        this.title = title;
+        this.author = author;
+        this.price = price;
     }
 }
