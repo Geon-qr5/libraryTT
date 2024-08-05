@@ -15,8 +15,8 @@ public class BookDTO {
     private String regdate;
     private String r_no;
 
-    public BookDTO(String b_no, String title, String author, int price) {
-        this.b_no = b_no;
+    // public BookDTO(String b_no, String title, String author, int price) {
+    public BookDTO(String title, String author, int price) {
         this.title = title;
         this.author = author;
         this.price = price;

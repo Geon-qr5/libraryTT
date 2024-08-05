@@ -18,7 +18,10 @@ public class ConnectionUtil {
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "user01", "1234");
+            // Connection객체를 반환해주는 메서드 호출
+            // 접속정보를 매개변수로 넣어줍니다.
+            con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl"
+                                                , "user01", "1234");
         } catch (ClassNotFoundException e) {
             System.out.println("라이브러리를 확인해주세요.");
             e.printStackTrace();
