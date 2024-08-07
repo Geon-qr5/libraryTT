@@ -548,15 +548,39 @@ HAVING SUM (SALARY) = (
 
 -- 6. 부서별 평균(소수점버림)급여가 가장 작은 부서의 부서코드와 부서명 평균급여를 조회
 🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔🤔;
+-- GROUP BY에서 문제 발생 DEPT_TITLE 추가로 해결
 SELECT      EMP.DEPT_CODE 부서코드, DEPT.DEPT_TITLE 부서명, FLOOR(AVG(SALARY)) 평균급여
 FROM        EMP, DEPT
 WHERE       EMP.DEPT_CODE = DEPT.DEPT_ID
-GROUP BY    DEPT_CODE
+GROUP BY    DEPT_CODE, DEPT_TITLE
 HAVING      FLOOR(AVG(SALARY)) = (
-                SELECT      MIN(FLOOR(AVG(SALARY)))
+                SELECT      FLOOR(MIN(AVG(SALARY)))
                 FROM        EMP
                 GROUP BY    DEPT_CODE
 );
+
+-- T)해설
+SELECT  AVG(SALARY) FROM EMP;
+-- 부서별 평균급여
+SELECT  AVG(SALARY) 
+FROM    EMP
+GROUP BY DEPT_CODE;
+-- 부서별 평균급여가 가장 작은 값
+SELECT  FLOOR(MIN(AVG(SALARY)))
+FROM    EMP
+GROUP BY DEPT_CODE;
+
+SELECT  DEPT_CODE, DEPT_TITLE, FLOOR(AVG(SALARY))
+FROM    EMP, DEPT
+WHERE   DEPT_CODE = DEPT_ID
+GROUP BY DEPT_CODE, DEPT_TITLE
+HAVING  FLOOR(AVG(SALARY)) = (
+                                SELECT  FLOOR(MIN(AVG(SALARY)))
+                                FROM    EMP
+                                GROUP BY DEPT_CODE
+                              );
+
+
 
 -- 7. 전지연 사원이 속해있는 부서원들 조회 (단, 전지연 사원은 제외)
 -- 사번, 사원명, 전화번호, 직급명, 부서명, 입사일 
